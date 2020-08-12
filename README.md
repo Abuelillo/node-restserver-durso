@@ -8,6 +8,9 @@ Paquetes usados
 - Express : https://www.npmjs.com/package/express
 - body-parser : https://www.npmjs.com/package/body-parser
 
+Servidor web
+- Heroku : https://dashboard.heroku.com/apps -> https://jamwebcur.herokuapp.com/
+
 Consola
 - nodemon ..
  
