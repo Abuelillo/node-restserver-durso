@@ -10,7 +10,7 @@ let verificaToken = (req, res, next) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
-                err: { message: 'Token no valido', kk: token, io: process.env.SEED }
+                err: { message: 'Token no valido' }
             });
         };
 
