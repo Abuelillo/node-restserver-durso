@@ -1,11 +1,21 @@
 const express = require('express');
-const Usuario = require('../models/usuario');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
 
+const Usuario = require('../models/usuario');
+//desestructuracion middleware -> comprobaciones automaticas al ejecutar
+const { verificaToken, verificaAdmin_Role } = require('../middlewares/autenticacion');
+const usuario = require('../models/usuario');
+
 const app = express();
 
-app.get('/usuario', function(req, res) {
+app.get('/usuario', verificaToken, (req, res) => {
+
+    /*return res.json({
+        usuario: req.usuario,
+        nombre: req.usuario.nombre,
+        email: req.usuario.email
+    })*/
 
     let desde = req.query.desde || 0; // inide paginacion
     desde = Number(desde);
@@ -22,7 +32,7 @@ app.get('/usuario', function(req, res) {
                     ok: false,
                     err
                 });
-            }
+            };
 
             Usuario.countDocuments({ estado: true /* conteo de filtro de registros*/ }, (err, conteo) => {
 
@@ -38,7 +48,7 @@ app.get('/usuario', function(req, res) {
     //res.json('get usuario LOCAL!!!')
 });
 
-app.post('/usuario', function(req, res) {
+app.post('/usuario', [verificaToken, verificaAdmin_Role], function(req, res) {
 
     let body = req.body;
 
@@ -56,7 +66,7 @@ app.post('/usuario', function(req, res) {
                 ok: false,
                 err
             });
-        }
+        };
 
         //usuarioDB.password = null;
 
@@ -68,7 +78,7 @@ app.post('/usuario', function(req, res) {
 
 });
 
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, res) {
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']);
 
@@ -79,7 +89,7 @@ app.put('/usuario/:id', function(req, res) {
                 ok: false,
                 err
             });
-        }
+        };
 
         res.json({
             ok: true,
@@ -90,7 +100,7 @@ app.put('/usuario/:id', function(req, res) {
 
 });
 
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, res) {
     let id = req.params.id;
 
     let cambiaEstado = { estado: false };
