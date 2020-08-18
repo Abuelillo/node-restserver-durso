@@ -10,7 +10,7 @@ const { json } = require('body-parser');
 
 const app = express();
 
-//configuraciondes de google
+// Configuraciones de Google
 async function verify(token) {
     const ticket = await client.verifyIdToken({
         idToken: token,
@@ -18,13 +18,12 @@ async function verify(token) {
         // Or, if multiple clients access the backend:
         //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
     });
-
     const payload = ticket.getPayload();
 
     return {
-        nombre: payload.nombre,
+        nombre: payload.name,
         email: payload.email,
-        emi: payload.picture,
+        img: payload.picture,
         google: true
     }
 }
@@ -42,6 +41,7 @@ app.post('/google', async(req, res) => {
         });
 
     Usuario.findOne({ email: googleUser.email }, (err, usuarioDB) => {
+
         if (err) {
             return res.status(500).json({
                 ok: false,
@@ -50,11 +50,12 @@ app.post('/google', async(req, res) => {
         };
 
         if (usuarioDB) {
+
             if (usuarioDB.google === false) {
                 return res.status(400).json({
                     ok: false,
                     err: {
-                        message: 'Debe de usar su autentificacion normal'
+                        message: 'Debe de usar su autenticación normal'
                     }
                 });
             } else {
@@ -62,14 +63,15 @@ app.post('/google', async(req, res) => {
                     usuario: usuarioDB
                 }, process.env.SEED, { expiresIn: process.env.CADUCIDAD_TOKEN });
 
-                return json({
+                return res.json({
                     ok: true,
                     usuario: usuarioDB,
-                    token
+                    token,
                 });
             }
+
         } else {
-            //si el usuario no existe en la bbdd
+            // Si el usuario no existe en nuestra base de datos
             let usuario = new Usuario();
 
             usuario.nombre = googleUser.nombre;
@@ -79,6 +81,7 @@ app.post('/google', async(req, res) => {
             usuario.password = ':)';
 
             usuario.save((err, usuarioDB) => {
+
                 if (err) {
                     return res.status(500).json({
                         ok: false,
@@ -90,20 +93,14 @@ app.post('/google', async(req, res) => {
                     usuario: usuarioDB
                 }, process.env.SEED, { expiresIn: process.env.CADUCIDAD_TOKEN });
 
-                return json({
+                return res.json({
                     ok: true,
                     usuario: usuarioDB,
-                    token
+                    token,
                 });
-            })
+            });
         }
-
-    })
-
-    /*res.json({
-        usuario: googleUser
-    });*/
-
+    });
 });
 
 app.post('/login', (req, res) => {
