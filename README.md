@@ -24,14 +24,14 @@ Web varias
 - Documentacion postman : https://documenter.getpostman.com/view/7488657/T1LS9jf2?version=latest
 
 Consola
-npm install express --save
-npm install boy-parser --save
-npm install mongoose --save
-npm install mongoose-unique-validator --save
-npm install bcrypt --save
-npm install underscore --save
-npm install jsonwebtoken --save
-npm install google-auth-library --save
+- npm install express --save
+- npm install boy-parser --save
+- npm install mongoose --save
+- npm install mongoose-unique-validator --save
+- npm install bcrypt --save
+- npm install underscore --save
+- npm install jsonwebtoken --save
+- npm install google-auth-library --save
 - nodemon server/server
 
 
