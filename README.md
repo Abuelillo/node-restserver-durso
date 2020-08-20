@@ -13,6 +13,7 @@ Paquetes usados
 - underscore : https://www.npmjs.com/package/underscore
 - jsonwebtoken : https://www.npmjs.com/package/jsonwebtoken
 - google Sing-In : https://developers.google.com/identity/sign-in/web/backend-auth
+- tratamiento de ficheros - https://www.npmjs.com/package/express-fileupload
 
 Servidor web (web)
 - Heroku : https://dashboard.heroku.com/apps -> https://jamwebcur.herokuapp.com/
@@ -32,6 +33,10 @@ Consola
 - npm install underscore --save
 - npm install jsonwebtoken --save
 - npm install google-auth-library --save
+<<<<<<< HEAD
+=======
+- npm install express-fileupload --save
+>>>>>>> cf9c428... FileUpload
 - nodemon server/server
 
 
