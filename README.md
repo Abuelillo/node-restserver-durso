@@ -33,10 +33,7 @@ Consola
 - npm install underscore --save
 - npm install jsonwebtoken --save
 - npm install google-auth-library --save
-<<<<<<< HEAD
-=======
 - npm install express-fileupload --save
->>>>>>> cf9c428... FileUpload
 - nodemon server/server
 
 
