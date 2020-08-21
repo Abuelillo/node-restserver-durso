@@ -19,6 +19,9 @@ Servidor web (web)
 - Heroku : https://dashboard.heroku.com/apps -> https://jamwebcur.herokuapp.com/
 - mongodb : https://cloud.mongodb.com/ (mongoDB Atlas)(bbdd free 500MB)
 
+Web Heroku
+- https://jamwebcur.herokuapp.com/
+
 Web varias
 - Consulta token : https://jwt.io/
 - Integracion google Sing-in :  https://developers.google.com/identity/sign-in/web/sign-in
